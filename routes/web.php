@@ -22,6 +22,8 @@ Route::get('/', function () {
     return view('login');
 });
 Auth::routes();
+// students
+Route::get('/students', [StudentController::class, 'index']);
 
 //  home
 Route::get('/home', [HomeController::class, 'index'])->name('home');
@@ -29,18 +31,18 @@ Route::get('/home', [HomeController::class, 'index'])->name('home');
 // profile
 Route::get('/profile', [ProfilesController::class, 'index']);
 Route::get('/documents', [ProfilesController::class, 'document']);
-
+// page admin
 Route::group(['middleware'=>'admin'], function(){
     Route::get('/students/create', [StudentController::class, 'create']);
     Route::post('/students', [StudentController::class, 'store']);
-    // dosen
-    Route::get('/dosen', [TeachersController::class, 'index']);
+    Route::get('/students/{student}/edit', [StudentController::class, 'edit']);
+    Route::delete('/students/{student}', [StudentController::class, 'destroy']);
+    Route::patch('/students/{student}', [StudentController::class, 'update']);
 });
+// page dosen
 Route::group(['middleware'=>'dosen'], function(){
     // dosen
     Route::get('/dosen', [TeachersController::class, 'index']);
 });
 Route::group(['middleware'=>'user'], function(){
-    // students
-    Route::get('/students', [StudentController::class, 'index']);
 });

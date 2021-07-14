@@ -7,7 +7,7 @@
           <!-- mini logo for sidebar mini 50x50 pixels -->
           <span class="logo-mini"><b>L</b>ST</span>
           <!-- logo for regular state and mobile devices -->
-          <span class="logo-lg"><b>Lara</b>STORE</span>
+          <span class="logo-lg"><b>Lara</b>CRUD</span>
         </a>
         <!-- Header Navbar: style can be found in header.less -->
         <nav class="navbar navbar-static-top" role="navigation">
@@ -92,28 +92,20 @@
             <li class="{{ request()->is('home') ? 'active' : '' }}"><a href="/home"><i class="fa fa-home"></i> <span>Home</span></i></a></li>
             <li class="{{ request()->is('profile') ? 'active' : '' }}"><a href="/profile"><i class="fa fa-user"></i> <span>Profile</span></a></li>
             <li class="{{ request()->is('documents') ? 'active' : '' }}"><a href="/documents"><i class="fa fa-book"></i> <span>Documents</span></a></li>
+            <li class="treeview {{ request()->is('/students') ? 'active' : '' }}">
+              <a href="#">
+                <i class="fa fa-book"></i> <span>Mahasiswa</span>
+                <i class="fa fa-angle-left pull-right"></i>
+              </a>
+              <ul class="treeview-menu">
+                <li class="treeview {{ request()->is('students') ? 'active' : '' }}"><a href="/students"><i class="fa fa-circle-o"></i>Data Mahasiswa</a></li>
             @if(Auth::user()->level == 3)
-              <li class="treeview {{ request()->is('/students') ? 'active' : '' }}">
-                <a href="#">
-                  <i class="fa fa-book"></i> <span>Mahasiswa</span>
-                  <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                  <li class="treeview {{ request()->is('students/create') ? 'active' : '' }}"><a href="/students/create"><i class="fa fa-circle-o"></i>Tambah Data</a></li>
-                </ul>
-              </li>
-            @elseif(Auth::user()->level == 2)
+                <li class="treeview {{ request()->is('students/create') ? 'active' : '' }}"><a href="/students/create"><i class="fa fa-circle-o"></i>Tambah Data</a></li>
+            @endif
+              </ul>
+            </li>
+            @if(Auth::user()->level == 2)
               <li class="{{ request()->is('dosen') ? 'active' : '' }}"><a href="/dosen"><i class="fa fa-book"></i> <span>Dosen</span></a></li>
-            @elseif(Auth::user()->level == 1)
-              <li class="treeview {{ request()->is('/students') ? 'active' : '' }}">
-                <a href="#">
-                  <i class="fa fa-book"></i> <span>Mahasiswa</span>
-                  <i class="fa fa-angle-left pull-right"></i>
-                </a>
-                <ul class="treeview-menu">
-                  <li class="treeview {{ request()->is('students') ? 'active' : '' }}"><a href="/students"><i class="fa fa-circle-o"></i>Data Mahasiswa</a></li>
-                </ul>
-              </li>
             @endif
           </ul>
         </section>
