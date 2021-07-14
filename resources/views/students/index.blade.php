@@ -10,34 +10,50 @@
                 <h3 class="box-title">Daftar Mahasiswa</h3>
             </div><!-- /.box-header -->
             <div class="box-body">
-                <table id="example2" class="table table-bordered table-hover">
+                <table id="example1" class="table table-bordered table-striped">
                     <thead>
                         <tr>
-                            <th>ID</th>
+                            <th>No</th>
                             <th>Nama</th>
                             <th>Nim</th>
                             <th>Email</th>
                             <th>Jurusan</th>
+                            @if(Auth::user()->level == 3)
+                            <th>Aksi</th>
+                            @endif
                         </tr>
                     </thead>
                     <tbody>
                         @foreach($mhs as $data)
                         <tr>
-                            <td>{{$data->id}}</td>
+                            <td>{{$loop->iteration}}</td>
                             <td>{{$data->nama}}</td>
                             <td>{{$data->nim}}</td>
                             <td>{{$data->email}}</td>
                             <td>{{$data->jurusan}}</td>
+                            @if(Auth::user()->level == 3)
+                            <td>
+                                <a href="{{ url('/students/'.$data->id.'/edit') }}" class="btn btn-success">EDIT</a>
+                                <form class="delete-mahasiswa-form" action="{{ url('/students/'.$data->id) }}" method="post" style="display:inline;">
+                                    @method('delete')
+                                    @csrf
+                                    <button onclick="return false" type="submit" class="btn btn-danger delete-mahasiswa">DELETE</button>
+                                </form>
+                            </td>
+                            @endif
                         </tr>
                         @endforeach
                     </tbody>
                     <tfoot>
                         <tr>
-                            <th>ID</th>
+                            <th>No</th>
                             <th>Nama</th>
                             <th>Nim</th>
                             <th>Email</th>
                             <th>Jurusan</th>
+                            @if(Auth::user()->level == 3)
+                            <th>Aksi</th>
+                            @endif
                         </tr>
                     </tfoot>
                 </table>
