@@ -47,6 +47,7 @@ class StudentController extends Controller
      */
     public function store(Request $request)
     {
+        $jmldata = Student::count();
         $request->validate([
             'nama' => 'required',
             'nim' => 'required|size:8|unique:students',
@@ -54,8 +55,9 @@ class StudentController extends Controller
             'jurusan' => 'required'
         ]);
         
-        $created = Student::create($request->all());
-        if($created){
+        $created = Student::create($request->all())->count();
+
+        if($created > $jmldata){
             Alert::success('Berhasil', 'Data Mahasiswa Berhasil Ditambahkan.');
         }else{
             Alert::error('Gagal', 'Data Mahasiswa Gagal Ditambahkan.');
@@ -133,5 +135,10 @@ class StudentController extends Controller
             Alert::error('Gagal', 'Data Mahasiswa Gagal Dihapus.');
         }
         return redirect('/students');
+    }
+    // print
+    public function print(){
+        $mhs = Student::All();
+        return view('students.print', compact('mhs'));
     }
 }

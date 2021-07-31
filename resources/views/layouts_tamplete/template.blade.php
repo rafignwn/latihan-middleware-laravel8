@@ -21,7 +21,7 @@
          folder instead of downloading all of them to reduce the load. -->
     <link rel="stylesheet" href="{{asset('template')}}/dist/css/skins/_all-skins.min.css">
     <!-- sweetalert2 -->
-    <link rel="stylesheet" href="{{asset('css')}}/sweetalert2.css">
+    <link rel="stylesheet" href="{{ config('sweetalert.animatecss') }}">
 
     <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
     <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
@@ -252,7 +252,8 @@
     <script src="{{asset('template')}}/dist/js/app.min.js"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{asset('template')}}/dist/js/demo.js"></script>
-    <script src="{{asset('js')}}/sweetalert2.all.min.js"></script>
+    <!-- Sweet alert -->
+    <script src="{{asset('vendor/sweetalert/sweetalert.all.js')  }}"></script>
     @include('sweetalert::alert')
     <script>
       $(function () {
@@ -270,6 +271,7 @@
     <script>
       $('.delete-mahasiswa').on('click', function(e){
         e.preventDefault();
+        const id = $(this).data('id');
         Swal.fire({
           title: 'Apakah anda yakin ?',
           text: "Data Mahasiswa akan Dihapus !",
@@ -280,7 +282,7 @@
           confirmButtonText: 'Ya, Hapus Data!'
         }).then((result) => {
           if (result.isConfirmed){
-            $('.delete-mahasiswa-form').submit();
+            $('#delete-mahasiswa-form-' + id).submit();
           }
         });
       });

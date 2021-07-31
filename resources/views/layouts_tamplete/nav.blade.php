@@ -92,7 +92,7 @@
             <li class="{{ request()->is('home') ? 'active' : '' }}"><a href="/home"><i class="fa fa-home"></i> <span>Home</span></i></a></li>
             <li class="{{ request()->is('profile') ? 'active' : '' }}"><a href="/profile"><i class="fa fa-user"></i> <span>Profile</span></a></li>
             <li class="{{ request()->is('documents') ? 'active' : '' }}"><a href="/documents"><i class="fa fa-book"></i> <span>Documents</span></a></li>
-            <li class="treeview {{ request()->is('/students') ? 'active' : '' }}">
+            <li class="treeview @if( request()->is('students') || request()->is('students/create') ) active @endif">
               <a href="#">
                 <i class="fa fa-book"></i> <span>Mahasiswa</span>
                 <i class="fa fa-angle-left pull-right"></i>
